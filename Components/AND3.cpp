@@ -14,6 +14,10 @@ void AND3::Operate()
 	//caclulate the output status as the ANDing of the three input pins
 
 	//Add you code here
+	if (GetInputPinStatus(1) == HIGH && GetInputPinStatus(2) == HIGH && GetInputPinStatus(3) == HIGH)
+		m_OutputPin.setStatus(HIGH);
+	else
+		m_OutputPin.setStatus(LOW);
 }
 
 

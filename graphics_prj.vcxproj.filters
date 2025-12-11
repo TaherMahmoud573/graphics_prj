@@ -173,6 +173,9 @@
     <ClCompile Include="Components\Switch.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\LED.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defs.H" />
@@ -306,6 +309,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\Switch.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\LED.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

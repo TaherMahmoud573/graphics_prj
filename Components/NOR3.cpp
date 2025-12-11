@@ -14,6 +14,10 @@ void NOR3::Operate()
 	//caclulate the output status as the NORing of the three input pins
 
 	//Add you code here
+	if (GetInputPinStatus(1) == LOW && GetInputPinStatus(2) == LOW && GetInputPinStatus(3) == LOW)
+		m_OutputPin.setStatus(HIGH);
+	else
+		m_OutputPin.setStatus(LOW);
 }
 
 
