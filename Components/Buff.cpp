@@ -14,6 +14,11 @@ void BUFF::Operate()
 	//caclulate the output status as the BUFFing of the One input pin
 
 	//Add you code here
+
+	if (GetInputPinStatus(1) == HIGH)
+		m_OutputPin.setStatus(HIGH);
+	else
+		m_OutputPin.setStatus(LOW);
 }
 
 

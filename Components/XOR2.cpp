@@ -14,6 +14,12 @@ void XOR2::Operate()
 	//caclulate the output status as the XORing of the two input pins
 
 	//Add you code here
+
+	if (GetInputPinStatus(1) != GetInputPinStatus(2))
+		m_OutputPin.setStatus(HIGH);
+	else
+		m_OutputPin.setStatus(LOW);
+
 }
 
 

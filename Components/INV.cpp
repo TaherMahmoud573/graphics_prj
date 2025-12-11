@@ -1,6 +1,6 @@
 #include "INV.h"
 
-INV::INV(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(2, r_FanOut)
+INV::INV(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(1, r_FanOut)
 {
 	m_GfxInfo.x1 = r_GfxInfo.x1;
 	m_GfxInfo.y1 = r_GfxInfo.y1;
@@ -14,6 +14,11 @@ void INV::Operate()
 	//caclulate the output status as the INVing of the One input pin
 
 	//Add you code here
+
+	if (GetInputPinStatus(1) == LOW)
+		m_OutputPin.setStatus(HIGH);
+	else
+		m_OutputPin.setStatus(LOW);
 }
 
 

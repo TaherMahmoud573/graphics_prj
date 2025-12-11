@@ -14,6 +14,11 @@ void NAND2::Operate()
 	//caclulate the output status as the NANDing of the two input pins
 
 	//Add you code here
+
+	if (GetInputPinStatus(1) == HIGH && GetInputPinStatus(2) == HIGH)
+		m_OutputPin.setStatus(LOW);
+	else
+		m_OutputPin.setStatus(HIGH);
 }
 
 
