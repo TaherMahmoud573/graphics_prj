@@ -11,7 +11,7 @@ AND3::AND3(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(3, r_FanOut)
 
 void AND3::Operate()
 {
-	//caclulate the output status as the ANDing of the three input pins
+	//caclulate the output status as the ANDing of the three input pin
 
 	//Add you code here
 	if (GetInputPinStatus(1) == HIGH && GetInputPinStatus(2) == HIGH && GetInputPinStatus(3) == HIGH)
