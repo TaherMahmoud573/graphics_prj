@@ -1,22 +1,22 @@
-#include "AddINV.h"
+#include "AddBuff.h"
 #include "..\ApplicationManager.h"
 
-AddINV::AddINV(ApplicationManager* pApp) :Action(pApp)
+AddBuff::AddBuff(ApplicationManager* pApp) :Action(pApp)
 {
 }
 
-AddINV::~AddINV(void)
+AddBuff::~AddBuff(void)
 {
 }
 
-void AddINV::ReadActionParameters()
+void AddBuff::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	//Print Action Message
-	pOut->PrintMsg("1-Input INV Gate: Click to add the gate");
+	pOut->PrintMsg("1-Input Buff Gate: Click to add the gate");
 
 	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);
@@ -26,14 +26,14 @@ void AddINV::ReadActionParameters()
 
 }
 
-void AddINV::Execute()
+void AddBuff::Execute()
 {
 	//Get Center point of the Gate
 	ReadActionParameters();
 
 	//Calculate the rectangle Corners
-	int Len = UI.INV_Width;
-	int Wdth = UI.INV_Height;
+	int Len = UI.AND2_Width;
+	int Wdth = UI.AND2_Height;
 
 	GraphicsInfo GInfo; //Gfx info to be used to construct the AND2 gate
 
@@ -41,15 +41,15 @@ void AddINV::Execute()
 	GInfo.x2 = Cx + Len / 2;
 	GInfo.y1 = Cy - Wdth / 2;
 	GInfo.y2 = Cy + Wdth / 2;
-	INV* pA = new INV(GInfo, INV_FANOUT);
+	BUFF* pA = new BUFF(GInfo, Buff_FANOUT);
 	pManager->AddComponent(pA);
 }
 
-void AddINV::Undo()
+void AddBuff::Undo()
 {
 }
 
-void AddINV::Redo()
+void AddBuff::Redo()
 {
 }
 
