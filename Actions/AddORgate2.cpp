@@ -32,8 +32,8 @@ void AddORgate2::Execute()
 	ReadActionParameters();
 
 	//Calculate the rectangle Corners
-	int Len = UI.AND2_Width;
-	int Wdth = UI.AND2_Height;
+	int Len = UI.OR2_Width;
+	int Wdth = UI.OR2_Height;
 
 	GraphicsInfo GInfo; //Gfx info to be used to construct the OR2 gate
 
