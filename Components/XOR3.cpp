@@ -14,6 +14,12 @@ void XOR3::Operate()
 	//caclulate the output status as the XORing of the three input pins
 
 	//Add you code here
+	int highCount = 0;
+	for (int i = 1; i <= 3; i++)
+	{
+		if (GetInputPinStatus(i) == HIGH)
+			highCount++;
+	}
 }
 
 
