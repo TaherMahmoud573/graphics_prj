@@ -7,7 +7,7 @@
   represent the 1-input INV gate
 */
 
-#include "Components/Gate.h"
+#include "Gate.h"
 
 class INV :public Gate
 {

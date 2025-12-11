@@ -1,7 +1,7 @@
 #ifndef _XOR3_H
 #define _XOR3_H
 
-#include "Components/Gate.h"
+#include "Gate.h"
 
 
 class XOR3 :public Gate

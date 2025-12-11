@@ -1,7 +1,7 @@
 #ifndef _NOR3_H
 #define _NOR3_H
 
-#include "Components/Gate.h"
+#include "Gate.h"
 
 
 class NOR3 :public Gate

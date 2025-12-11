@@ -140,6 +140,39 @@
     <ClCompile Include="CMUgraphicsLib\windowinput.cpp">
       <Filter>CMUgraphics Library</Filter>
     </ClCompile>
+    <ClCompile Include="Components\AND3.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Buff.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\INV.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\NAND2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\NOR2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\NOR3.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\OR2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\XNOR2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\XOR2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\XOR3.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Switch.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defs.H" />
@@ -241,6 +274,39 @@
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\windowinput.h">
       <Filter>CMUgraphics Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AND3.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Buff.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\INV.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NAND2.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NOR2.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NOR3.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\OR2.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\XNOR2.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\XOR2.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\XOR3.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Switch.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

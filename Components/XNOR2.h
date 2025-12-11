@@ -1,7 +1,7 @@
 #ifndef _XNOR2_H
 #define _XNOR2_H
 
-#include "Components/Gate.h"
+#include "Gate.h"
 
 
 class XNOR2 :public Gate

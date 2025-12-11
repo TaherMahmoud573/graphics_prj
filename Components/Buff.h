@@ -7,7 +7,7 @@
   represent the 1-input BUFFER Gate
 */
 
-#include "Components/Gate.h"
+#include "Gate.h"
 
 class BUFF :public Gate
 {
