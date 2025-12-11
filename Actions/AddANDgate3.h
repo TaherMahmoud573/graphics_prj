@@ -1,5 +1,5 @@
-#ifndef _ADD_AND_GATE_H
-#define _ADD_AND_GATE_H
+#ifndef _ADD_AND_GATES_H
+#define _ADD_AND_GATES_H
 
 #include "action.h"
 #include "..\Components\AND3.h"

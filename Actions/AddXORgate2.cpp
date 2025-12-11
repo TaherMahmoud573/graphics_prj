@@ -32,8 +32,8 @@ void AddXORgate2::Execute()
 	ReadActionParameters();
 
 	//Calculate the rectangle Corners
-	int Len = UI.AND2_Width;
-	int Wdth = UI.AND2_Height;
+	int Len = UI.XOR2_Width;
+	int Wdth = UI.XOR2_Height;
 
 	GraphicsInfo GInfo; //Gfx info to be used to construct the AND2 gate
 
