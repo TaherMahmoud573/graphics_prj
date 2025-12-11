@@ -47,19 +47,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_AND_GATE_2:
 			pAct= new AddANDgate2(this);	
 			break;
-
 		case ADD_OR_GATE_2:
 			pAct = new AddORgate2(this);
 			break;
-
+			
 		case ADD_Buff:
 			pAct = new AddBuff(this);
 			break;
-
+			
 		case ADD_INV:
 			pAct = new AddINV(this);
 			break;
-
+			
 		case ADD_NAND_GATE_2:
 			pAct = new AddNANDgate2(this);
 			break;
