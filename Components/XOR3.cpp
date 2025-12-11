@@ -20,6 +20,10 @@ void XOR3::Operate()
 		if (GetInputPinStatus(i) == HIGH)
 			highCount++;
 	}
+	if (highCount % 2 == 1)
+		m_OutputPin.setStatus(HIGH);
+	else
+		m_OutputPin.setStatus(LOW);
 }
 
 
