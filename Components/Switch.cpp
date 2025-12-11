@@ -14,6 +14,7 @@ void Switch::Operate()
 	//caclulate the output status of the Switch
 
 	//Add you code here
+	m_OutputPin.setStatus(HIGH);
 }
 
 
