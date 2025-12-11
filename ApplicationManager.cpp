@@ -47,10 +47,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_AND_GATE_2:
 			pAct= new AddANDgate2(this);	
 			break;
+		
 		case ADD_OR_GATE_2:
 			pAct = new AddORgate2(this);
 			break;
-			
+	
 		case ADD_Buff:
 			pAct = new AddBuff(this);
 			break;
@@ -94,7 +95,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_LED:
 			pAct = new AddLED(this);
 			break;
-
+			
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
