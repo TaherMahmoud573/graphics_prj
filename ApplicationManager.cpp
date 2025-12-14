@@ -12,6 +12,7 @@
 #include "Actions\AddXORgate3.h"
 #include "Actions\AddSwitch.h"
 #include "Actions\AddLED.h"
+#include "Actions\AddCONNECTION.h"
 
 
 ApplicationManager::ApplicationManager()
@@ -98,6 +99,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
+			pAct = new AddCONNECTION(this);
 			break;
 	
 

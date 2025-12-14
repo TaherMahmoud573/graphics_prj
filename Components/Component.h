@@ -4,6 +4,9 @@
 #include "..\Defs.h"
 #include "..\GUI\Output.h"
 
+class OutputPin; // Forward declaration
+class InputPin;  // Forward declaration
+
 //Base class for classes Gate, Switch, and LED.
 class Component
 {
@@ -16,12 +19,16 @@ public:
 	virtual void Operate() = 0;	//Calculates the output according to the inputs
 	virtual void Draw(Output* pOut) = 0;	//for each component to Draw itself
 	
+	GraphicsInfo GetParameters() const { return m_GfxInfo; };
 	
 	virtual int GetOutPinStatus()=0;	//returns status of outputpin if LED, return -1
 	virtual int GetInputPinStatus(int n)=0;	//returns status of Inputpin # n if SWITCH, return -1
 
 	virtual void setInputPinStatus(int n, STATUS s)=0;	//set status of Inputpin # n, to be used by connection class.
 
+	// allow users of Component* to obtain pin pointers
+	virtual OutputPin* GetOutputPin() = 0;
+	virtual InputPin* GetInputPin() = 0;
 	
 	Component();	
 	

@@ -35,6 +35,10 @@ public:
 	
 	void UpdateInterface();	//Redraws all the drawing window
 
+	int GetCompCount() const { return CompCount; }
+
+	Component** GetCompList() { return CompList; }	
+
 	//Gets a pointer to Input / Output Object
 	Output* GetOutput();
 	Input* GetInput();
