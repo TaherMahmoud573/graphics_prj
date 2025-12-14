@@ -52,10 +52,16 @@ void AddCONNECTION::Execute()
     InputPin* dstPin = nullptr;
     Output* pOut = pManager->GetOutput();
 
+    /*
     GInfo.x1 = Cx;
     GInfo.y1 = Cy;
     GInfo.x2 = Cx;
     GInfo.y2 = Cy;
+    */
+    GInfo.x1 = x1;
+    GInfo.x2 = x2;
+    GInfo.y1 = y1;
+    GInfo.y2 = y2;
 
     for (int i = 0; i < CompCount; i++) {
         GraphicsInfo compParam = CompList[i]->GetParameters();
