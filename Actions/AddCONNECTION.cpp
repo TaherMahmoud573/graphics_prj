@@ -76,7 +76,6 @@ void AddCONNECTION::Execute()
         pOut->PrintMsg("No source component found at the clicked location. Action cancelled.");
         return;
     }
-
     for (int i = 0; i < CompCount; i++) {
         GraphicsInfo compParam = CompList[i]->GetParameters();
         if (x2 > compParam.x1 && x2 < compParam.x2 && y2 > compParam.y1 && y2 < compParam.y2) {
@@ -108,6 +107,16 @@ void AddCONNECTION::Execute()
         return;
     }
 
+    if (GInfo.x1 == GInfo.x2 || GInfo.y1 == GInfo.y2) {
+        pOut->PrintMsg("Invalid connection points. Action cancelled.");
+        return;
+	}
+
+    if (GInfo.x1 > GInfo.x2) {
+        pOut->PrintMsg("Connections must be drawn from left to right. Action cancelled.");
+        return;
+    }
+
     if (srcPin) { // A check for safety
         Connection* pA = new Connection(GInfo, srcPin, dstPin);
         if (!srcPin->ConnectTo(pA)) {
@@ -115,6 +124,7 @@ void AddCONNECTION::Execute()
             delete pA;
             return;
         }
+        dstPin->setConnection(pA);
         dstPin->setComponent(pA);
         pManager->AddComponent(pA);
         pA->setSourcePin(srcPin);
