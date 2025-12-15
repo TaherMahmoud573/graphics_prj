@@ -62,7 +62,7 @@ void Output::PrintMsg(string msg) const
 	pWind->DrawString(MsgX, UI.height - MsgY, msg);
 }
 //////////////////////////////////////////////////////////////////////////////////
-void Output::ClearStatusBar()const
+void Output::ClearStatusBar() const
 {
 	// Set the Message offset from the Status Bar
 	int MsgX = 0;
@@ -81,7 +81,7 @@ void Output::ClearToolBar()const
 	pWind->DrawRectangle(0, UI.height - UI.ToolBarHeight - UI.StatusBarHeight - 1, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-//Clears the drawing (degin) area
+//Clears the drawing (design) area
 void Output::ClearDrawingArea() const
 {
 	pWind->SetPen(BLACK, 1);
@@ -171,9 +171,6 @@ void Output::CreateSimulationToolBar() const
 	pWind->DrawLine(0, UI.height - UI.StatusBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 
-//======================================================================================//
-//								Components Drawing Functions							//
-//======================================================================================//
 
 //======================================================================================//
 //								Components Drawing Functions							//

@@ -142,7 +142,7 @@ enum FANOUT
 	AND3_FANOUT = 5,	//Default fan out of 3-input AND gate
 	NOR3_FANOUT = 5,	//Default fan out of 3-input NOR gate
 	XOR3_FANOUT = 5,		//Default fan out of 3-input XOR gate
-	Switch_FANOUT = 5		//Default fan out of 3-input XOR gate
+	Switch_FANOUT = 5		//Default fan out of Switch
 
 };
 
@@ -151,7 +151,7 @@ enum FANOUT
 //this structure can be extended if desired
 struct GraphicsInfo
 {
-	int x1,y1, x2, y2;
+	int x1, y1, x2, y2;
 };
 
 #ifndef NULL

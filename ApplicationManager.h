@@ -43,6 +43,8 @@ public:
 	Output* GetOutput();
 	Input* GetInput();
 
+	bool ApplicationManager::IsAreaFree(const GraphicsInfo& Gfx) const;    //New
+
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
 

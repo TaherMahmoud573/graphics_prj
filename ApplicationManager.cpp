@@ -13,6 +13,9 @@
 #include "Actions\AddSwitch.h"
 #include "Actions\AddLED.h"
 #include "Actions\AddCONNECTION.h"
+#include "Actions\SIMMODE.h"
+#include "Actions\DSNMODE.h"
+#include "Actions\UNDO.h"
 
 
 ApplicationManager::ApplicationManager()
@@ -102,12 +105,24 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new AddCONNECTION(this);
 			break;
 	
+		case SIM_MODE:                                    //New
+			pAct = new SIMMODE(this);
+			break;
+
+
+		case DSN_MODE:                                    //New
+			pAct = new DSNMODE(this);
+			break;
+
+		case UNDO:
+			pAct = new UndoAction(this);                        //New
+			break;
 
 		case EXIT:
 			///TODO: create ExitAction here
 			break;
 	}
-	if(pAct)
+	if (pAct)
 	{
 		pAct->Execute();
 		delete pAct;
@@ -116,10 +131,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 }
 ////////////////////////////////////////////////////////////////////
 
+
 void ApplicationManager::UpdateInterface()
 {
-		for(int i=0; i<CompCount; i++)
-			CompList[i]->Draw(OutputInterface);
+
+	for(int i=0; i<CompCount; i++)
+		CompList[i]->Draw(OutputInterface);
 
 }
 
@@ -133,6 +150,20 @@ Input* ApplicationManager::GetInput()
 Output* ApplicationManager::GetOutput()
 {
 	return OutputInterface;
+}
+
+bool ApplicationManager::IsAreaFree(const GraphicsInfo& Gfx) const             //New
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		GraphicsInfo old = CompList[i]->GetGraphicsInfo();
+
+		bool overlap = !(Gfx.x2 < old.x1 || Gfx.x1 > old.x2 || Gfx.y2 < old.y1 || Gfx.y1 > old.y2);
+
+		if (overlap)
+			return false;
+	}
+	return true;
 }
 
 ////////////////////////////////////////////////////////////////////

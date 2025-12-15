@@ -21,15 +21,18 @@ public:
 	
 	GraphicsInfo GetParameters() const { return m_GfxInfo; };
 	
-	virtual int GetOutPinStatus()=0;	//returns status of outputpin if LED, return -1
-	virtual int GetInputPinStatus(int n)=0;	//returns status of Inputpin # n if SWITCH, return -1
+	virtual int GetOutPinStatus() = 0;	//returns status of outputpin if LED, return -1
+	virtual int GetInputPinStatus(int n) = 0;	//returns status of Inputpin # n if SWITCH, return -1
 
-	virtual void setInputPinStatus(int n, STATUS s)=0;	//set status of Inputpin # n, to be used by connection class.
+	virtual void setInputPinStatus(int n, STATUS s) = 0;	//set status of Inputpin # n, to be used by connection class.
+
 
 	// allow users of Component* to obtain pin pointers
 	virtual OutputPin* GetOutputPin() = 0;
 	virtual InputPin* GetInputPin() = 0;
 	
+	GraphicsInfo GetGraphicsInfo() const;                           //New
+
 	Component();	
 	
 	//Destructor must be virtual
