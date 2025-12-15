@@ -85,7 +85,6 @@ void LoadAction::Execute()
 			return;
 		}
 
-		// handle connections later (they require pin references)
 		if (type == "CONNECTION") {
 			connectionsToCreate.push_back({ g, type });
 			continue;
@@ -93,7 +92,6 @@ void LoadAction::Execute()
 
 		Component* pComp = nullptr;
 
-		// Create the appropriate component
 		if (type == "AND2") {
 			pComp = new AND2(g, AND2_FANOUT);
 		}
@@ -145,7 +143,6 @@ void LoadAction::Execute()
 		}
 	}
 
-	// Now create connections (requires existing components and pin objects)
 	for (const auto& ce : connectionsToCreate) {
 		GraphicsInfo GInfo = ce.g;
 		int CompCount = pManager->GetCompCount();
@@ -156,7 +153,6 @@ void LoadAction::Execute()
 		int srcIndex = -1, dstIndex = -1;
 		int dstInputIndex = -1;
 
-		// find source component (point-in-rect test for GInfo.x1,y1)
 		for (int j = 0; j < CompCount; ++j) {
 			GraphicsInfo compParam = CompList[j]->GetParameters();
 			if (GInfo.x1 >= compParam.x1 && GInfo.x1 <= compParam.x2 &&
@@ -171,7 +167,6 @@ void LoadAction::Execute()
 			continue;
 		}
 
-		// find destination component (point-in-rect test for GInfo.x2,y2)
 		for (int j = 0; j < CompCount; ++j) {
 			GraphicsInfo compParam = CompList[j]->GetParameters();
 			if (GInfo.x2 >= compParam.x1 && GInfo.x2 <= compParam.x2 &&
@@ -195,11 +190,9 @@ void LoadAction::Execute()
 			}
 		}
 		if (!dstPin) {
-			// already warned in search; skip
 			continue;
 		}
 
-		// Create connection and wire pins
 		if (srcPin->checkAvailability()) {
 			Connection* pConn = new Connection(GInfo, srcPin, dstPin);
 			if (!srcPin->ConnectTo(pConn)) {
