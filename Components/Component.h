@@ -30,6 +30,7 @@ public:
 	// allow users of Component* to obtain pin pointers
 	virtual OutputPin* GetOutputPin() = 0;
 	virtual InputPin* GetInputPin() = 0;
+	virtual int GetNumberOfInputs() const = 0;
 	
 	GraphicsInfo GetGraphicsInfo() const;                           //New
 

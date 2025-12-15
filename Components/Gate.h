@@ -24,6 +24,7 @@ public:
 
 	virtual OutputPin* GetOutputPin() { return &m_OutputPin; };
 	virtual InputPin* GetInputPin() { return m_InputPins; };
+	virtual int GetNumberOfInputs() const { return m_Inputs; };
 };
 
 #endif

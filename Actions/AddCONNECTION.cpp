@@ -65,6 +65,8 @@ void AddCONNECTION::Execute()
                 pOut->PrintMsg("Maximum number of fan outs reached. Source component occupied.");
                 return;
             }
+			GInfo.x1 = compParam.x2 - 10;
+            GInfo.y1 = (compParam.y1 + compParam.y2)/2;
             break;
         }
     }
@@ -78,31 +80,49 @@ void AddCONNECTION::Execute()
     for (int i = 0; i < CompCount; i++) {
         GraphicsInfo compParam = CompList[i]->GetParameters();
         if (x2 > compParam.x1 && x2 < compParam.x2 && y2 > compParam.y1 && y2 < compParam.y2) {
-            dstPin = CompList[i]->GetInputPin();
-            if (!dstPin) {
-                pOut->PrintMsg("Maximum number of input pins reached. Destination component occupied.");
+            InputPin* pins = CompList[i]->GetInputPin();
+            int nInputs = CompList[i]->GetNumberOfInputs();
+            bool found = false;
+            for (int j = 0; j < nInputs; ++j) {
+                if (!pins[j].isConnected()) {
+                    dstPin = &pins[j];
+                    // compute endpoint for j-th input pin (evenly spaced)
+                    GInfo.x2 = compParam.x1 + 10;
+                    int height = compParam.y2 - compParam.y1;
+                    GInfo.y2 = compParam.y1 + (j + 1) * height / (nInputs + 1);
+                    found = true;
+                    break;
+                }
+            }
+            //dstPin = CompList[i]->GetInputPin();
+            if (!found) {
+                pOut->PrintMsg("Destination component has no free input pins.");
                 return;
             }
-            break;
         }
     }
-
+    
     // If no destination pin found, abort
     if (!dstPin) {
         pOut->PrintMsg("No destination component found at the clicked location. Action cancelled.");
         return;
     }
 
-    if (srcPin) { // Add check for safety
+    if (srcPin) { // A check for safety
         Connection* pA = new Connection(GInfo, srcPin, dstPin);
-        pManager->AddComponent(pA);
-        pA->setDestPin(dstPin);
-        pA->setSourcePin(srcPin);
-        srcPin->ConnectTo(pA);
+        if (!srcPin->ConnectTo(pA)) {
+            pOut->PrintMsg("Source cannot accept additional connections. Action cancelled.");
+            delete pA;
+            return;
+        }
         dstPin->setComponent(pA);
+        pManager->AddComponent(pA);
+        pA->setSourcePin(srcPin);
+        pA->setDestPin(dstPin);
         pA->Operate();
+        //srcPin->ConnectTo(pA);
+	    pOut->PrintMsg("Connection created.");
     }
-	pOut->PrintMsg("Connection created.");
 }
 void AddCONNECTION::Undo()
 {
