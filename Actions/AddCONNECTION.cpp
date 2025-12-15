@@ -52,12 +52,6 @@ void AddCONNECTION::Execute()
     InputPin* dstPin = nullptr;
     Output* pOut = pManager->GetOutput();
 
-    /*
-    GInfo.x1 = Cx;
-    GInfo.y1 = Cy;
-    GInfo.x2 = Cx;
-    GInfo.y2 = Cy;
-    */
     GInfo.x1 = x1;
     GInfo.x2 = x2;
     GInfo.y1 = y1;
@@ -67,6 +61,10 @@ void AddCONNECTION::Execute()
         GraphicsInfo compParam = CompList[i]->GetParameters();
         if (x1 > compParam.x1 && x1 < compParam.x2 && y1 > compParam.y1 && y1 < compParam.y2) {
             srcPin = CompList[i]->GetOutputPin();
+            if (!srcPin->checkAvailability()) {
+                pOut->PrintMsg("Maximum number of fan outs reached. Source component occupied.");
+                return;
+            }
             break;
         }
     }
@@ -81,6 +79,10 @@ void AddCONNECTION::Execute()
         GraphicsInfo compParam = CompList[i]->GetParameters();
         if (x2 > compParam.x1 && x2 < compParam.x2 && y2 > compParam.y1 && y2 < compParam.y2) {
             dstPin = CompList[i]->GetInputPin();
+            if (!dstPin) {
+                pOut->PrintMsg("Maximum number of input pins reached. Destination component occupied.");
+                return;
+            }
             break;
         }
     }
@@ -94,8 +96,11 @@ void AddCONNECTION::Execute()
     if (srcPin) { // Add check for safety
         Connection* pA = new Connection(GInfo, srcPin, dstPin);
         pManager->AddComponent(pA);
+        pA->setDestPin(dstPin);
+        pA->setSourcePin(srcPin);
         srcPin->ConnectTo(pA);
-        //dstPin->setComponent(pA);
+        dstPin->setComponent(pA);
+        pA->Operate();
     }
 	pOut->PrintMsg("Connection created.");
 }

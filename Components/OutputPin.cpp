@@ -20,3 +20,12 @@ bool OutputPin::ConnectTo(Connection *r_Conn)
 	
 	return false;	//can't connect to any more connections
 }
+
+bool OutputPin::checkAvailability()
+{
+	if (m_Conn < m_FanOut)
+	{
+		return true;
+	}
+	return false;
+}

@@ -13,7 +13,7 @@
 #include "OutputPin.h"
 #include "Component.h"
 
-class Gate:public Component
+class Gate :public Component
 {
 protected:
 	InputPin* m_InputPins;	//Array of input pins of the Gate
