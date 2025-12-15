@@ -29,7 +29,7 @@ public:
 	virtual int GetOutPinStatus();	//returns status of outputpin if LED, return -1
 	virtual int GetInputPinStatus(int n);	//returns status of Inputpin # n if SWITCH, return -1
 	virtual int GetNumberOfInputs() const { return 1; };
-
+	virtual string GetType() { return "CONNECTION"; };
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 
 

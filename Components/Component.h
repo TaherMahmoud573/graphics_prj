@@ -31,6 +31,7 @@ public:
 	virtual OutputPin* GetOutputPin() = 0;
 	virtual InputPin* GetInputPin() = 0;
 	virtual int GetNumberOfInputs() const = 0;
+	virtual string GetType() = 0;
 	
 	GraphicsInfo GetGraphicsInfo() const;                           //New
 
