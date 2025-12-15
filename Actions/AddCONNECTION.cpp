@@ -86,10 +86,17 @@ void AddCONNECTION::Execute()
                 if (!pins[j].isConnected()) {
                     dstPin = &pins[j];
                     // compute endpoint for j-th input pin (evenly spaced)
-                    GInfo.x2 = compParam.x1 + 10;
+                    /*GInfo.x2 = compParam.x1 + 10;
                     int height = compParam.y2 - compParam.y1;
                     GInfo.y2 = compParam.y1 + (j + 1) * height / (nInputs + 1);
+                    found = true;*/
+
+                    int height = (compParam.y2 - compParam.y1) * 0.8;
+					int Dy = height / (nInputs + 2);
+					GInfo.y2 = height* 0.25 + compParam.y1 + (j + 1) * Dy;
+                    GInfo.x2 = compParam.x1 + 20;
                     found = true;
+
                     break;
                 }
             }
