@@ -28,6 +28,11 @@ void AddNANDgate2::ReadActionParameters()
 
 void AddNANDgate2::Execute()
 {
+	//Get a Pointer to the Input / Output Interfaces  //New
+	Output* pOut = pManager->GetOutput();  //New
+	Input* pIn = pManager->GetInput();     //New
+
+
 	//Get Center point of the Gate
 	ReadActionParameters();
 
@@ -35,12 +40,27 @@ void AddNANDgate2::Execute()
 	int Len = UI.AND2_Width;
 	int Wdth = UI.AND2_Height;
 
+
+	if (Cx < 0 || Cx > UI.width || Cy < UI.ToolBarHeight + 50 || Cy > UI.height - UI.StatusBarHeight - UI.ToolBarHeight - 50)  //New
+	{
+		pOut->PrintMsg("Invalid location! Please click inside the drawing area.");
+
+		return;
+	}
+
 	GraphicsInfo GInfo; //Gfx info to be used to construct the AND2 gate
 
 	GInfo.x1 = Cx - Len / 2;
 	GInfo.x2 = Cx + Len / 2;
 	GInfo.y1 = Cy - Wdth / 2;
 	GInfo.y2 = Cy + Wdth / 2;
+
+	if (!pManager->IsAreaFree(GInfo))                                          //New
+	{
+		pOut->PrintMsg("Cannot place component here, area is occupied.");
+		return;
+	}
+
 	NAND2* pA = new NAND2(GInfo, NAND2_FANOUT);
 	pManager->AddComponent(pA);
 }
