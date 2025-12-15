@@ -18,6 +18,8 @@
 #include "Actions\UNDO.h"
 #include "Actions\Simulate.h"
 #include "Actions\ChangeSwitch.h"
+#include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
 
 
 ApplicationManager::ApplicationManager()
@@ -135,6 +137,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case Change_Switch:
 			pAct = new ChangeSwitch(this);
+			break;
+
+		case SAVE:
+			pAct = new SaveAction(this);
+			break;
+
+		case LOAD:
+			pAct = new LoadAction(this);
 			break;
 
 		case EXIT:
