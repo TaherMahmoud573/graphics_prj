@@ -51,10 +51,13 @@ string Input::GetString(Output* pOut)
 }
 
 //This function reads the position where the user clicks to determine the desired action
-ActionType Input::GetUserAction() const
+ActionType Input::GetUserAction(int& a,int& b) const
 {
 	int x, y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+
+	a = x;
+	b = y;
 
 	if (UI.AppMode == DESIGN)	//application is in design mode
 	{

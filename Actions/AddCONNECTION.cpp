@@ -96,7 +96,9 @@ void AddCONNECTION::Execute()
 					GInfo.y2 = height* 0.25 + compParam.y1 + (j + 1) * Dy;
                     GInfo.x2 = compParam.x1 + 20;
                     found = true;
-
+                    if (CompList[i]->GetNumberOfInputs() == 1) {
+                        GInfo.y2 = height * 0.5 + compParam.y1 + 20;
+                    }
                     break;
                 }
             }

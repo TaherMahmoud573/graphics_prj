@@ -6,6 +6,7 @@ Switch::Switch(const GraphicsInfo& r_GfxInfo, int r_FanOut) : Gate(0, r_FanOut)
 	m_GfxInfo.y1 = r_GfxInfo.y1;
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
+	switchState = LOW;
 }
 
 
@@ -14,7 +15,7 @@ void Switch::Operate()
 	//caclulate the output status of the Switch
 
 	//Add you code here
-	m_OutputPin.setStatus(HIGH);
+	m_OutputPin.setStatus(switchState);
 }
 
 
@@ -42,4 +43,16 @@ int Switch::GetInputPinStatus(int n)
 //Set status of an input pin to HIGH or LOW
 void Switch::setInputPinStatus(int n, STATUS s)
 {
+}
+
+void Switch::Toggle()
+{
+	if (switchState == LOW) {
+		switchState = HIGH;
+		m_OutputPin.setStatus(HIGH);
+	}
+	else {
+		switchState = LOW;
+		m_OutputPin.setStatus(LOW);
+	}
 }
