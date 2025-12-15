@@ -45,7 +45,7 @@ ActionType ApplicationManager::GetUserAction()
 	ActionType ActType = InputInterface->GetUserAction(x1, y1);
 	for (int i = 0; i < CompCount; i++) {
 		GraphicsInfo compParam = CompList[i]->GetParameters();
-		if (x1 > compParam.x1 && x1 < compParam.x2 && y1 > compParam.y1 && y1 < compParam.y2) {
+		if (x1 > compParam.x1 && x1 < compParam.x2 && y1 > compParam.y1 && y1 < compParam.y2 && CompList[i]->GetType() == "SWITCH") {
 			ActType = Change_Switch;
 			return ActType;
 		}
@@ -176,7 +176,8 @@ bool ApplicationManager::IsAreaFree(const GraphicsInfo& Gfx) const             /
 	for (int i = 0; i < CompCount; i++)
 	{
 		GraphicsInfo old = CompList[i]->GetGraphicsInfo();
-
+		if (CompList[i]->GetType() == "CONNECTION")
+			continue;
 		bool overlap = !(Gfx.x2 < old.x1 || Gfx.x1 > old.x2 || Gfx.y2 < old.y1 || Gfx.y1 > old.y2);
 
 		if (overlap)

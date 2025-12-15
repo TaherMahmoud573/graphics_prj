@@ -22,6 +22,7 @@ public:
 	virtual string GetType() { return "LED"; };
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	void UpdateLedState(); //updates the LED state based on input pin status
+
 };
 
 #endif
