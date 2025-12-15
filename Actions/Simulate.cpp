@@ -30,42 +30,6 @@ void Simulate::ReadActionParameters()
 
 void Simulate::Execute()
 {
-	//Get a Pointer to the Input / Output Interfaces  //New
-	//Output* pOut = pManager->GetOutput();  //New
-	//Input* pIn = pManager->GetInput();     //New
-
-
-	//Get Center point of the Gate
-	//ReadActionParameters();
-
-	//Calculate the rectangle Corners
-	//int Len = UI.AND2_Width;
-	//int Wdth = UI.AND2_Height;
-
-
-	//if (Cx < 0 || Cx > UI.width || Cy < UI.ToolBarHeight + 50 || Cy > UI.height - UI.StatusBarHeight - UI.ToolBarHeight - 50)  //New
-	//{
-	//	pOut->PrintMsg("Invalid location! Please click inside the drawing area.");
-
-	//	return;
-	//}
-
-	//GraphicsInfo GInfo; //Gfx info to be used to construct the AND2 gate
-
-	//GInfo.x1 = Cx - Len / 2;
-	//GInfo.x2 = Cx + Len / 2;
-	//GInfo.y1 = Cy - Wdth / 2;
-	//GInfo.y2 = Cy + Wdth / 2;
-
-	//if (!pManager->IsAreaFree(GInfo))                                          //New
-	//{
-	//	pOut->PrintMsg("Cannot place component here, area is occupied.");
-	//	return;
-	//}
-
-	//AND2* pA = new AND2(GInfo, AND2_FANOUT);
-	//pManager->AddComponent(pA);
-	// Get interfaces
 	Output* pOut = pManager->GetOutput();
 
 	int CompCount = pManager->GetCompCount();
@@ -75,28 +39,18 @@ void Simulate::Execute()
 		pOut->PrintMsg("Nothing to simulate.");
 		return;
 	}
-
-	// Run a few stabilization passes. For each pass:
-	//  1) call Operate() on all non-Connection components (gates, switches, LEDs)
-	//  2) call Operate() on all Connection components to push outputs into inputs
-	// This ensures outputs are computed before connections transfer them to destination pins.
-	int passes = CompCount + 2;
-	for (int pass = 0; pass < passes; ++pass) {
-		// 1) non-connection components
-		for (int i = 0; i < CompCount; ++i) {
-			Connection* c = dynamic_cast<Connection*>(CompList[i]);
-			if (c == nullptr) // not a connection => gate / switch / LED
-				CompList[i]->Operate();
+	int margin = CompCount + 3;
+	for (int i = 0; i < margin; i++) {
+		for (int j = 0; j < CompCount; j++) {
+			if (CompList[j]->GetType() != "CONNECTION")
+				CompList[j]->Operate();
 		}
-		// 2) connection components
-		for (int i = 0; i < CompCount; ++i) {
-			Connection* c = dynamic_cast<Connection*>(CompList[i]);
-			if (c != nullptr)
-				c->Operate();
+		for (int j = 0; j < CompCount; j++) {
+			if (CompList[j]->GetType() == "CONNECTION")
+				CompList[j]->Operate();
 		}
 	}
 
-	// Update LEDs' visual/internal state from their input pins
 	for (int i = 0; i < CompCount; ++i) {
 		LED* led = dynamic_cast<LED*>(CompList[i]);
 		if (led) {
@@ -104,9 +58,7 @@ void Simulate::Execute()
 		}
 	}
 
-	// Redraw updated circuit
 	pManager->UpdateInterface();
-
 	pOut->PrintMsg("Simulation completed.");
 }
 
