@@ -149,6 +149,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case EXIT:
 			///TODO: create ExitAction here
+			void ClearAllComponents();
 			break;
 	}
 	if (pAct)
