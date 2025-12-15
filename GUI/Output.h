@@ -1,3 +1,5 @@
+#ifndef OUTPUT_H
+#define OUTPUT_H
 #include "..\Defs.h"
 #include "Input.h"
 #include <string>
@@ -44,3 +46,5 @@ public:
 
     ~Output();
 };
+
+#endif
