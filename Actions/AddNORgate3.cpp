@@ -28,12 +28,25 @@ void AddNORgate3::ReadActionParameters()
 
 void AddNORgate3::Execute()
 {
+	//Get a Pointer to the Input / Output Interfaces  //New
+	Output* pOut = pManager->GetOutput();  //New
+	Input* pIn = pManager->GetInput();     //New
+
+
 	//Get Center point of the Gate
 	ReadActionParameters();
 
 	//Calculate the rectangle Corners
-	int Len = UI.NOR3_Width;
-	int Wdth = UI.NOR3_Height;
+	int Len = UI.AND2_Width;
+	int Wdth = UI.AND2_Height;
+
+
+	if (Cx < 0 || Cx > UI.width || Cy < UI.ToolBarHeight + 50 || Cy > UI.height - UI.StatusBarHeight - UI.ToolBarHeight - 50)  //New
+	{
+		pOut->PrintMsg("Invalid location! Please click inside the drawing area.");
+
+		return;
+	}
 
 	GraphicsInfo GInfo; //Gfx info to be used to construct the AND2 gate
 
@@ -41,6 +54,12 @@ void AddNORgate3::Execute()
 	GInfo.x2 = Cx + Len / 2;
 	GInfo.y1 = Cy - Wdth / 2;
 	GInfo.y2 = Cy + Wdth / 2;
+
+	if (!pManager->IsAreaFree(GInfo))                                          //New
+	{
+		pOut->PrintMsg("Cannot place component here, area is occupied.");
+		return;
+	}
 	NOR3* pA = new NOR3(GInfo, NOR3_FANOUT);
 	pManager->AddComponent(pA);
 }
