@@ -55,10 +55,8 @@ void Switch::Toggle(Output* pOut)
         m_OutputPin.setStatus(LOW);
     }
 
-    // If caller provided an Output pointer, redraw this single switch immediately.
     if (pOut)
     {
-        // Draw reflecting new state; selection flag left false here.
         pOut->DrawSwitch(m_GfxInfo, (switchState == HIGH), false);
     }
 }

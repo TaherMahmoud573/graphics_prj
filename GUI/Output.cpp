@@ -133,6 +133,7 @@ void Output::CreateDesignToolBar() const
 	MenuItemImages[ITM_REDO] = "images\\Menu\\Menu_REDO_M.jpg";
 
 	MenuItemImages[ITM_SIM_MODE] = "images\\Menu\\Menu_SIMULATION_M.jpg";
+
 	
 	//Draw menu item one image at a tim
 	for (int i = 0; i < ITM_DSN_CNT/2; i++)
@@ -327,7 +328,6 @@ void Output::DrawSwitch(GraphicsInfo r_GfxInfo, bool isOn, bool selected) const
 {
     string GateImage;
 
-    // Use new ON images when isOn==true, otherwise use existing OFF images.
     if (isOn)
     {
         if (selected)
@@ -338,26 +338,36 @@ void Output::DrawSwitch(GraphicsInfo r_GfxInfo, bool isOn, bool selected) const
     else
     {
         if (selected)
-            GateImage = "Images\\Gates\\Gate_SWITCH_Hi_O_M.jpg"; // existing highlighted OFF image
+            GateImage = "Images\\Gates\\Gate_SWITCH_Hi_O_M.jpg";
         else
-            GateImage = "Images\\Gates\\Gate_SWITCH_O_M.jpg";    // existing OFF image
+            GateImage = "Images\\Gates\\Gate_SWITCH_O_M.jpg";
     }
 
     // Draw the chosen image at the switch rectangle
     pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.Switch_Width, UI.Switch_Height);
 }
 
-void Output::DrawLED(GraphicsInfo r_GfxInfo, bool selected) const
+void Output::DrawLED(GraphicsInfo r_GfxInfo, bool isOn, bool selected) const
 {
 	string GateImage;
-	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Gates\\Gate_LED_Hi_M.jpg";
-	else
-		GateImage = "Images\\Gates\\Gate_LED_M.jpg";
 
-	//Draw AND2 Gate at Gfx_Info (1st corner)
-	//Set the Image Width & Height by AND2 Image Parameter in UI_Info
-	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.LED_Width, UI.LED_Height);
+	if (isOn)
+	{
+		if (selected)
+			GateImage = "Images\\Gates\\Gate_LED_Hi_O_M.jpg";
+		else
+			GateImage = "Images\\Gates\\Gate_LED_O_M.jpg";
+	}
+	else
+	{
+		if (selected)
+			GateImage = "Images\\Gates\\Gate_LED_Hi_C_M.jpg"; // existing highlighted OFF image
+		else
+			GateImage = "Images\\Gates\\Gate_LED_C_M.jpg";    // existing OFF image
+	}
+
+	// Draw the chosen image at the switch rectangle
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.Switch_Width, UI.Switch_Height);
 }
 
 //TODO: Add similar functions to draw all components

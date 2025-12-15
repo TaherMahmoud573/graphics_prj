@@ -40,7 +40,7 @@ public:
     void DrawXOR3(GraphicsInfo r_GfxInfo, bool selected = false) const;
 
     void DrawSwitch(GraphicsInfo r_GfxInfo, bool isOn = false, bool selected = false) const;
-    void DrawLED(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawLED(GraphicsInfo r_GfxInfo, bool isOn = false, bool selected = false) const;
     void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
     void DrawString(int x, int y, string text) const;
 

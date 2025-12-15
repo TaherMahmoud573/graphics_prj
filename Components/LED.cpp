@@ -6,20 +6,30 @@ LED::LED(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(1, r_FanOut)
 	m_GfxInfo.y1 = r_GfxInfo.y1;
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
+	ledState = LOW;
 }
 
 
 void LED::Operate()
 {
 	//caclulate the output of the LED
-	if (ledState == LOW)
+	/*if (ledState == LOW)
 		{
 		m_OutputPin.setStatus(LOW);
 	}
 	else {
 		m_OutputPin.setStatus(HIGH);
 	}
-	//Add you code here
+	//Add you code here*/
+
+	if (m_InputPins[0].getStatus() == HIGH) {
+		ledState = HIGH;
+		m_OutputPin.setStatus(HIGH);
+	}
+	else {
+		ledState = LOW;
+		m_OutputPin.setStatus(LOW);
+	}
 }
 
 
@@ -28,10 +38,12 @@ void LED::Operate()
 void LED::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	if (ledState == HIGH && UI.AppMode == SIMULATION)
-		pOut->DrawLED(m_GfxInfo, true);
-	else
-		pOut->DrawLED(m_GfxInfo, false);
+	//if (ledState == HIGH && UI.AppMode == SIMULATION)
+	//	pOut->DrawLED(m_GfxInfo, (ledState == HIGH), false);
+	//else
+	//	pOut->DrawLED(m_GfxInfo, (ledState == HIGH), false);
+
+	pOut->DrawLED(m_GfxInfo, (ledState == HIGH), false);
 }
 
 //returns status of outputpin

@@ -23,7 +23,7 @@ public:
 	virtual int GetInputPinStatus(int n);	//returns status of Inputpin # n if SWITCH, return -1
 	virtual string GetType() { return "SWITCH"; };
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
-	void Toggle(Output* pOut = nullptr); //toggles the switch state. optional Output* to force immediate redraw
+	void Toggle(Output* pOut = nullptr); //toggles the switch state. optional Output* to redraw
 };
 
 #endif
