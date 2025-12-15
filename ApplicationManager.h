@@ -47,6 +47,7 @@ public:
 
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
+	void ClearAllComponents();
 
 	//destructor
 	~ApplicationManager();

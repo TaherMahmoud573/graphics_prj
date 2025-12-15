@@ -20,7 +20,6 @@ void SaveAction::ReadActionParameters()
 	if (!input.empty()) {
 		filename = input;
 	}
-	// ensure a file extension (use .txt by default)
 	if (filename.find('.') == string::npos) {
 		filename += ".txt";
 	}
@@ -28,7 +27,6 @@ void SaveAction::ReadActionParameters()
 
 void SaveAction::Execute()
 {
-	// get filename from user
 	ReadActionParameters();
 
 	Output* pOut = pManager->GetOutput();
@@ -41,8 +39,6 @@ void SaveAction::Execute()
 		return;
 	}
 
-	// Simple save format: first line = component count
-	// then each line: <Type> x1 y1 x2 y2
 	ofs << compCount << std::endl;
 	for (int i = 0; i < compCount; ++i) {
 		GraphicsInfo g = compList[i]->GetParameters();

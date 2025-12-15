@@ -2,7 +2,6 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\Output.h"
 #include "..\GUI\Input.h"
-
 #include "..\Components\AND2.h"
 #include "..\Components\OR2.h"
 #include "..\Components\BUFF.h"
@@ -42,7 +41,7 @@ void LoadAction::ReadActionParameters()
 	if (!input.empty()) {
 		filename = input;
 	}
-	// ensure a file extension (use .txt by default)
+
 	if (filename.find('.') == string::npos) {
 		filename += ".txt";
 	}
@@ -50,8 +49,10 @@ void LoadAction::ReadActionParameters()
 
 void LoadAction::Execute()
 {
-	// ask user for filename
 	ReadActionParameters();
+
+	pManager->ClearAllComponents();
+	pManager->GetOutput()->ClearDrawingArea();
 
 	Output* pOut = pManager->GetOutput();
 
@@ -71,7 +72,6 @@ void LoadAction::Execute()
 
 	Component** compList = pManager->GetCompList();
 
-	// We'll store connection lines to create after all other components exist
 	struct ConnEntry { GraphicsInfo g; string rawType; };
 	std::vector<ConnEntry> connectionsToCreate;
 
@@ -131,18 +131,15 @@ void LoadAction::Execute()
 			pComp = new Switch(g, Switch_FANOUT);
 		}
 		else if (type == "LED") {
-			// LEDs were created with Switch_FANOUT in AddLED
 			pComp = new LED(g, Switch_FANOUT);
 		}
 		else {
-			// Unknown type -> skip line but warn
 			std::ostringstream msg;
 			msg << "Unknown component type in file: " << type << " (skipped).";
 			pOut->PrintMsg(msg.str());
 			continue;
 		}
 
-		// Add to manager
 		if (pComp) {
 			pManager->AddComponent(pComp);
 		}

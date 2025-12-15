@@ -197,7 +197,15 @@ bool ApplicationManager::IsAreaFree(const GraphicsInfo& Gfx) const             /
 }
 
 ////////////////////////////////////////////////////////////////////
-
+void ApplicationManager::ClearAllComponents()
+{
+	for (int i = 0; i < CompCount; ++i) {
+		delete CompList[i];
+		CompList[i] = nullptr;
+	}
+	CompCount = 0;
+}
+////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()
 {
 	for(int i=0; i<CompCount; i++)
