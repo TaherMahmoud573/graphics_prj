@@ -16,6 +16,8 @@
 #include "Actions\SIMMODE.h"
 #include "Actions\DSNMODE.h"
 #include "Actions\UNDO.h"
+#include "Actions\Simulate.h"
+#include "Actions\ChangeSwitch.h"
 
 
 ApplicationManager::ApplicationManager()
@@ -39,7 +41,16 @@ void ApplicationManager::AddComponent(Component* pComp)
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
-	return InputInterface->GetUserAction(); 	
+	int x1, y1;
+	ActionType ActType = InputInterface->GetUserAction(x1, y1);
+	for (int i = 0; i < CompCount; i++) {
+		GraphicsInfo compParam = CompList[i]->GetParameters();
+		if (x1 > compParam.x1 && x1 < compParam.x2 && y1 > compParam.y1 && y1 < compParam.y2) {
+			ActType = Change_Switch;
+			return ActType;
+		}
+	}
+	return ActType;
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -116,6 +127,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case UNDO:
 			pAct = new UndoAction(this);                        //New
+			break;
+
+		case SIM:
+			pAct = new Simulate(this);                        //New
+			break;
+
+		case Change_Switch:
+			pAct = new ChangeSwitch(this);
 			break;
 
 		case EXIT:
