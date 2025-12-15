@@ -1,5 +1,8 @@
 #include "Output.h"
 
+#include <string>
+using namespace std;
+
 Output::Output()
 {
 	//Initialize user interface parameters
@@ -320,17 +323,28 @@ void Output::DrawXOR3(GraphicsInfo r_GfxInfo, bool selected) const
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.XOR3_Width, UI.XOR3_Height);
 }
 
-void Output::DrawSwitch(GraphicsInfo r_GfxInfo, bool selected) const
+void Output::DrawSwitch(GraphicsInfo r_GfxInfo, bool isOn, bool selected) const
 {
-	string GateImage;
-	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Gates\\Gate_SWITCH_Hi_M.jpg";
-	else
-		GateImage = "Images\\Gates\\Gate_SWITCH_M.jpg";
+    string GateImage;
 
-	//Draw AND2 Gate at Gfx_Info (1st corner)
-	//Set the Image Width & Height by AND2 Image Parameter in UI_Info
-	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.Switch_Width, UI.Switch_Height);
+    // Use new ON images when isOn==true, otherwise use existing OFF images.
+    if (isOn)
+    {
+        if (selected)
+            GateImage = "Images\\Gates\\Gate_SWITCH_C_Hi_M.jpg";
+        else
+            GateImage = "Images\\Gates\\Gate_SWITCH_C_M.jpg";
+    }
+    else
+    {
+        if (selected)
+            GateImage = "Images\\Gates\\Gate_SWITCH_Hi_O_M.jpg"; // existing highlighted OFF image
+        else
+            GateImage = "Images\\Gates\\Gate_SWITCH_O_M.jpg";    // existing OFF image
+    }
+
+    // Draw the chosen image at the switch rectangle
+    pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.Switch_Width, UI.Switch_Height);
 }
 
 void Output::DrawLED(GraphicsInfo r_GfxInfo, bool selected) const

@@ -43,7 +43,7 @@ void ChangeSwitch::Execute()
 			Switch* sw = dynamic_cast<Switch*>(CompList[i]);
 			if (sw)
 			{
-				sw->Toggle();           // flip state and update its output pin
+				sw->Toggle(pOut);           // flip state and update its output pin
 				toggled = true;
 				pOut->PrintMsg("Switch toggled.");
 				break;

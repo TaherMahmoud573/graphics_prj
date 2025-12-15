@@ -1,49 +1,46 @@
-#pragma once
 #include "..\Defs.h"
 #include "Input.h"
+#include <string>
 
-class Output	//The application manager should have a pointer to this class
+class window; // Forward declaration for window class
+
+class Output
 {
 private:
-	window* pWind;	//Pointer to the Graphics Window
+    window* pWind; // Pointer to the Graphics Window
+
 public:
-	Output(); // Performs the Window Initialization
-	Input* CreateInput() const; //creates a pointer to the Input object
-	void ChangeTitle(string Title) const;
+    Output();
+    Input* CreateInput() const;
 
-	void CreateDesignToolBar() const;	//Tool bar of the design mode
-	void CreateSimulationToolBar() const;//Tool bar of the simulation mode
-	void CreateStatusBar() const;	//Create Status bar
+    window* CreateWind(int wd, int h, int x, int y) const;
+    void ChangeTitle(string Title) const;
 
-	void ClearStatusBar() const;		//Clears the status bar
-	void ClearDrawingArea() const;	//Clears the drawing area
-	void ClearToolBar() const; //clears tool bar
-	window* CreateWind(int wd, int h, int x, int y) const; //Creates user interface window
+    void CreateStatusBar() const;
+    void PrintMsg(string msg) const;
+    void ClearStatusBar() const;
+    void ClearToolBar() const;
+    void ClearDrawingArea() const;
+    void CreateDesignToolBar() const;
+    void CreateSimulationToolBar() const;
 
+    // Components drawing functions
+    void DrawAND2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawBUFF(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawINV(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawNAND2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawNOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawXOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawXNOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawAND3(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawNOR3(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawXOR3(GraphicsInfo r_GfxInfo, bool selected = false) const;
 
-	// Draws 2-input AND gate
-	void DrawAND2(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawSwitch(GraphicsInfo r_GfxInfo, bool isOn = false, bool selected = false) const;
+    void DrawLED(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
+    void DrawString(int x, int y, string text) const;
 
-	///TODO: Make similar functions for drawing all other gates, switch, and LED, .. etc
-	void DrawBUFF(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawINV(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawNAND2(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawNOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawXOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawXNOR2(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawAND3(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawNOR3(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawXOR3(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawSwitch(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawLED(GraphicsInfo r_GfxInfo, bool selected = false) const;
-
-	// Draws Connection
-	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
-
-	void PrintMsg(string msg) const;	//Print a message on Status bar
-	void DrawString(int x, int y, string text) const;
-
-
-	~Output();
+    ~Output();
 };

@@ -1,4 +1,5 @@
 #include "Switch.h"
+#include "..\GUI\Output.h" // needed for immediate redraw and UI check
 
 Switch::Switch(const GraphicsInfo& r_GfxInfo, int r_FanOut) : Gate(0, r_FanOut)
 {
@@ -12,9 +13,7 @@ Switch::Switch(const GraphicsInfo& r_GfxInfo, int r_FanOut) : Gate(0, r_FanOut)
 
 void Switch::Operate()
 {
-	//caclulate the output status of the Switch
-
-	//Add you code here
+	//calculate the output status of the Switch
 	m_OutputPin.setStatus(switchState);
 }
 
@@ -23,8 +22,7 @@ void Switch::Operate()
 // Draws Switch
 void Switch::Draw(Output* pOut)
 {
-	//Call output class and pass gate drawing info to it.
-	pOut->DrawSwitch(m_GfxInfo);
+	pOut->DrawSwitch(m_GfxInfo, (switchState == HIGH), false);
 }
 
 //returns status of outputpin
@@ -45,14 +43,22 @@ void Switch::setInputPinStatus(int n, STATUS s)
 {
 }
 
-void Switch::Toggle()
+void Switch::Toggle(Output* pOut)
 {
-	if (switchState == LOW) {
-		switchState = HIGH;
-		m_OutputPin.setStatus(HIGH);
-	}
-	else {
-		switchState = LOW;
-		m_OutputPin.setStatus(LOW);
-	}
+    // Flip state and update its output pin
+    if (switchState == LOW) {
+        switchState = HIGH;
+        m_OutputPin.setStatus(HIGH);
+    }
+    else {
+        switchState = LOW;
+        m_OutputPin.setStatus(LOW);
+    }
+
+    // If caller provided an Output pointer, redraw this single switch immediately.
+    if (pOut)
+    {
+        // Draw reflecting new state; selection flag left false here.
+        pOut->DrawSwitch(m_GfxInfo, (switchState == HIGH), false);
+    }
 }
