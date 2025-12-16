@@ -6,7 +6,7 @@ Delete::Delete(ApplicationManager* pApp)
     : Action(pApp)
 {
 }
-
+void ReadActionParameters() {}
 void Delete::Execute()
 {
     Output* pOut = pManager->GetOutput();
@@ -51,3 +51,4 @@ void Delete::Execute()
 
     pOut->PrintMsg("Component deleted successfully.");
 }
+
