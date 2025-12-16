@@ -22,6 +22,7 @@
 #include "Actions\LoadAction.h"
 #include "Actions\CreateTRUTHTABLE.h"
 #include "Actions\AddLabel.h"
+#include "Actions\Delete.h"
 
 ApplicationManager::ApplicationManager()
 {
@@ -142,6 +143,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		
 		case ADD_Label:
 	         pAct = new AddLabel(this);
+	         break;
+		
+        case DELETE:
+	         pAct = new Delete(this);
 	         break;
 
 		case SAVE:
