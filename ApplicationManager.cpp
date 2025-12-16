@@ -47,7 +47,7 @@ ActionType ApplicationManager::GetUserAction()
 	ActionType ActType = InputInterface->GetUserAction(x1, y1);
 	for (int i = 0; i < CompCount; i++) {
 		GraphicsInfo compParam = CompList[i]->GetParameters();
-		if (x1 > compParam.x1 && x1 < compParam.x2 && y1 > compParam.y1 && y1 < compParam.y2 && CompList[i]->GetType() == "SWITCH") {
+		if (x1 > compParam.x1 && x1 < compParam.x2 && y1 > compParam.y1 && y1 < compParam.y2 && CompList[i]->GetType() == "SWITCH" && UI.AppMode==SIMULATION) {
 			ActType = Change_Switch;
 			return ActType;
 		}

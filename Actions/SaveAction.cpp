@@ -20,9 +20,7 @@ void SaveAction::ReadActionParameters()
 	if (!input.empty()) {
 		filename = input;
 	}
-	if (filename.find('.') == string::npos) {
 		filename += ".txt";
-	}
 }
 
 void SaveAction::Execute()

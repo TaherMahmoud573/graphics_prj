@@ -351,7 +351,7 @@ void Output::DrawLED(GraphicsInfo r_GfxInfo, bool isOn, bool selected) const
 {
 	string GateImage;
 
-	if (isOn)
+	if (isOn && UI.AppMode == SIMULATION)
 	{
 		if (selected)
 			GateImage = "Images\\Gates\\Gate_LED_Hi_O_M.jpg";
@@ -361,9 +361,9 @@ void Output::DrawLED(GraphicsInfo r_GfxInfo, bool isOn, bool selected) const
 	else
 	{
 		if (selected)
-			GateImage = "Images\\Gates\\Gate_LED_Hi_C_M.jpg"; // existing highlighted OFF image
+			GateImage = "Images\\Gates\\Gate_LED_Hi_C_M.jpg";
 		else
-			GateImage = "Images\\Gates\\Gate_LED_C_M.jpg";    // existing OFF image
+			GateImage = "Images\\Gates\\Gate_LED_C_M.jpg";   
 	}
 
 	// Draw the chosen image at the switch rectangle

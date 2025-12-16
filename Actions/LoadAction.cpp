@@ -18,7 +18,6 @@
 #include "..\Components\Connection.h"
 
 #include <fstream>
-#include <vector>
 #include <sstream>
 
 LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp), filename("circuit.txt")
@@ -72,8 +71,14 @@ void LoadAction::Execute()
 
 	Component** compList = pManager->GetCompList();
 
-	struct ConnEntry { GraphicsInfo g; string rawType; };
-	std::vector<ConnEntry> connectionsToCreate;
+	// Allocate arrays to hold connection entries (no vectors or structs)
+	int maxEntries = count;
+	int* conn_x1 = new int[maxEntries];
+	int* conn_y1 = new int[maxEntries];
+	int* conn_x2 = new int[maxEntries];
+	int* conn_y2 = new int[maxEntries];
+	string* conn_type = new string[maxEntries];
+	int connCount = 0;
 
 	for (int i = 0; i < count; ++i) {
 		string type;
@@ -81,12 +86,20 @@ void LoadAction::Execute()
 		ifs >> type >> g.x1 >> g.y1 >> g.x2 >> g.y2;
 		if (!ifs) {
 			pOut->PrintMsg("File read error.");
+			// cleanup
+			delete[] conn_x1; delete[] conn_y1; delete[] conn_x2; delete[] conn_y2; delete[] conn_type;
 			ifs.close();
 			return;
 		}
 
 		if (type == "CONNECTION") {
-			connectionsToCreate.push_back({ g, type });
+			// store primitive connection entry for later processing
+			conn_x1[connCount] = g.x1;
+			conn_y1[connCount] = g.y1;
+			conn_x2[connCount] = g.x2;
+			conn_y2[connCount] = g.y2;
+			conn_type[connCount] = type;
+			++connCount;
 			continue;
 		}
 
@@ -98,7 +111,7 @@ void LoadAction::Execute()
 		else if (type == "OR2") {
 			pComp = new OR2(g, OR2_FANOUT);
 		}
-		else if (type == "BUFF" || type == "BUFF") {
+		else if (type == "BUFF") {
 			pComp = new BUFF(g, Buff_FANOUT);
 		}
 		else if (type == "INV") {
@@ -143,8 +156,14 @@ void LoadAction::Execute()
 		}
 	}
 
-	for (const auto& ce : connectionsToCreate) {
-		GraphicsInfo GInfo = ce.g;
+	// Process stored connections using primitive arrays
+	for (int idx = 0; idx < connCount; ++idx) {
+		GraphicsInfo GInfo;
+		GInfo.x1 = conn_x1[idx];
+		GInfo.y1 = conn_y1[idx];
+		GInfo.x2 = conn_x2[idx];
+		GInfo.y2 = conn_y2[idx];
+
 		int CompCount = pManager->GetCompCount();
 		Component** CompList = pManager->GetCompList();
 
@@ -212,6 +231,13 @@ void LoadAction::Execute()
 			continue;
 		}
 	}
+
+	// cleanup allocated arrays
+	delete[] conn_x1;
+	delete[] conn_y1;
+	delete[] conn_x2;
+	delete[] conn_y2;
+	delete[] conn_type;
 
 	ifs.close();
 
