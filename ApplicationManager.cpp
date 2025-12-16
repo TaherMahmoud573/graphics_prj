@@ -21,6 +21,7 @@
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\CreateTRUTHTABLE.h"
+#include "Actions\AddLabel.h"
 
 ApplicationManager::ApplicationManager()
 {
