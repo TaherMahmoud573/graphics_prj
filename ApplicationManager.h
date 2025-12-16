@@ -35,6 +35,7 @@ public:
 	
 	void UpdateInterface();	//Redraws all the drawing window
 
+    void SetCompCount(int count) { CompCount = count; }
 	int GetCompCount() const { return CompCount; }
 
 	Component** GetCompList() { return CompList; }	
