@@ -18,7 +18,7 @@ Output::Output()
 	
 	//Create the drawing window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);	
-	ChangeTitle("Programming Techniques Project");
+	ChangeTitle("Maryam & Taher Project");
 
 	CreateDesignToolBar();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar

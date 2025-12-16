@@ -20,7 +20,7 @@
 #include "Actions\ChangeSwitch.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
-
+#include "Actions\CreateTRUTHTABLE.h"
 
 ApplicationManager::ApplicationManager()
 {
@@ -147,10 +147,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new LoadAction(this);
 			break;
 
+		case Create_TruthTable:
+			pAct = new CreateTRUTHTABLE(this);
+			break;
+
 		case EXIT:
 			///TODO: create ExitAction here
 			void ClearAllComponents();
 			break;
+
+			
 	}
 	if (pAct)
 	{
