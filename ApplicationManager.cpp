@@ -139,6 +139,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case Change_Switch:
 			pAct = new ChangeSwitch(this);
 			break;
+		
+		case ADD_Label:
+	         pAct = new AddLabel(this);
+	         break;
 
 		case SAVE:
 			pAct = new SaveAction(this);
